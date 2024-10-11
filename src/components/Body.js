@@ -1,17 +1,84 @@
 import ResCard from "./ResCard";
-import restrauntList from "../utils/mockData";
+import { useEffect, useState } from "react";
+import Shimmer from "./Shimmer";
+import { Link } from "react-router-dom";
 
 const Body = () => {
-  return (
+  const [restrauntList, setRestrauntList] = useState([]);
+  const [filteredResList, setFilteredResList] = useState([]);
+  const [searchText, setSearchText] = useState("");
+
+  useEffect(() => {
+    fetchData();
+  }, []);
+
+  const fetchData = async () => {
+    // fetch is a browser function to call api, not a javascript function
+    const data = await fetch(
+      "https://www.swiggy.com/dapi/restaurants/list/v5?lat=17.4757964&lng=78.3619756&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING"
+    );
+    const json = await data.json();
+    // optional chaining
+    setRestrauntList(
+      json?.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle?.restaurants
+    );
+    setFilteredResList(
+      json?.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle?.restaurants
+    );
+  };
+
+  return restrauntList.length === 0 ? (
+    <div>
+      <Shimmer />
+    </div>
+  ) : (
     <div className="body">
-      <div className="search">Search</div>
+      <div className="body-header">
+        <div className="search-container">
+          <input
+            type="text"
+            className="search-bar"
+            value={searchText}
+            onChange={(e) => {
+              setSearchText(e.target.value);
+            }}
+          />
+          <button
+            className="search-btn"
+            onClick={() => {
+              const filteredArray = restrauntList.filter((res) => {
+                return res.info.name
+                  .toLowerCase()
+                  .includes(searchText.toLowerCase());
+              });
+              setFilteredResList(filteredArray);
+            }}
+          >
+            search
+          </button>
+        </div>
+        <button
+          className="top-res-btn"
+          onClick={() => {
+            setFilteredResList(
+              restrauntList.filter((restrauntInfo) => {
+                return restrauntInfo.info.avgRating >= 4;
+              })
+            );
+          }}
+        >
+          Top Restaurants
+        </button>
+      </div>
       <div className="res-container">
-        {restrauntList.map((restrauntInfo) => {
+        {filteredResList.map((restrauntInfo) => {
           return (
-            <ResCard
-              key={restrauntInfo.info.id}
-              restrauntDetails={restrauntInfo}
-            />
+            <Link to="/resturant/123">
+              <ResCard
+                key={restrauntInfo.info.id}
+                restrauntDetails={restrauntInfo}
+              />
+            </Link>
           );
         })}
       </div>
