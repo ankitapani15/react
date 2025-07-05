@@ -2,6 +2,7 @@ import ResCard from "./ResCard";
 import { useEffect, useState } from "react";
 import Shimmer from "./Shimmer";
 import { Link } from "react-router-dom";
+import useOnlineStatus from "../utils/useOnlineStatus";
 
 const Body = () => {
   const [restrauntList, setRestrauntList] = useState([]);
@@ -26,6 +27,10 @@ const Body = () => {
       json?.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle?.restaurants
     );
   };
+
+  if (!useOnlineStatus())
+    return <h1>Please check your internet connection!</h1>;
+
   return restrauntList.length === 0 ? (
     <div>
       <Shimmer />
