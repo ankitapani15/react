@@ -10,7 +10,9 @@ const ResMenu = () => {
 
   const menuItems =
     resDetails?.cards[4]?.groupedCard?.cardGroupMap?.REGULAR?.cards[7]?.card
-      ?.card?.itemCards;
+      ?.card?.itemCards ||
+    resDetails?.cards[4]?.groupedCard?.cardGroupMap?.REGULAR?.cards[2].card.card
+      .categories[0].itemCards;
 
   return (
     <div>
