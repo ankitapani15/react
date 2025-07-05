@@ -1,4 +1,10 @@
+import UserClass from "./UserClass";
+
 const About = () => {
-  return <div>hi</div>;
+  return (
+    <div>
+      <UserClass name={"Ankita Pani"} />
+    </div>
+  );
 };
 export default About;

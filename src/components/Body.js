@@ -26,7 +26,6 @@ const Body = () => {
       json?.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle?.restaurants
     );
   };
-
   return restrauntList.length === 0 ? (
     <div>
       <Shimmer />
@@ -73,7 +72,7 @@ const Body = () => {
       <div className="res-container">
         {filteredResList.map((restrauntInfo) => {
           return (
-            <Link to="/resturant/123">
+            <Link to={`resturant/${restrauntInfo.info.id}`}>
               <ResCard
                 key={restrauntInfo.info.id}
                 restrauntDetails={restrauntInfo}
