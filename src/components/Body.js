@@ -37,18 +37,18 @@ const Body = () => {
     </div>
   ) : (
     <div className="body">
-      <div className="body-header">
-        <div className="search-container">
+      <div className="flex">
+        <div className="p-4 m-4">
           <input
             type="text"
-            className="search-bar"
+            className="border-2 border-gray-300 rounded-md px-4 py-1 focus:outline-none focus:ring-2 focus:ring-red-400 transition duration-200 w-72 shadow-sm"
             value={searchText}
             onChange={(e) => {
               setSearchText(e.target.value);
             }}
           />
           <button
-            className="search-btn"
+            className="px-6 py-1 m-2 rounded-lg  bg-red-300 hover:bg-red-100"
             onClick={() => {
               const filteredArray = restrauntList.filter((res) => {
                 return res.info.name
@@ -61,20 +61,22 @@ const Body = () => {
             search
           </button>
         </div>
-        <button
-          className="top-res-btn"
-          onClick={() => {
-            setFilteredResList(
-              restrauntList.filter((restrauntInfo) => {
-                return restrauntInfo.info.avgRating >= 4;
-              })
-            );
-          }}
-        >
-          Top Restaurants
-        </button>
+        <div className="py-4 my-4">
+          <button
+            className="px-6 py-1 my-2 rounded-lg  bg-red-300 hover:bg-red-100"
+            onClick={() => {
+              setFilteredResList(
+                restrauntList.filter((restrauntInfo) => {
+                  return restrauntInfo.info.avgRating >= 4;
+                })
+              );
+            }}
+          >
+            Top Restaurants
+          </button>
+        </div>
       </div>
-      <div className="res-container">
+      <div className="flex flex-wrap">
         {filteredResList.map((restrauntInfo) => {
           return (
             <Link to={`resturant/${restrauntInfo.info.id}`}>

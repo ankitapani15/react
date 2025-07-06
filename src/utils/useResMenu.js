@@ -8,7 +8,6 @@ const useResMenu = (resId) => {
   }, []);
 
   const fetchMenu = async () => {
-    console.log("fetchcalled");
     const data = await fetch(
       `https://www.swiggy.com/dapi/menu/pl?page-type=REGULAR_MENU&complete-menu=true&lat=17.4757964&lng=78.3619756&restaurantId=${resId}`
     );

@@ -1,4 +1,4 @@
-.header {
+/* .header {
   display: flex;
   justify-content: space-between;
   border: 1px solid black;
@@ -66,4 +66,6 @@
 .login-btn {
   margin: 10px;
   width: 5rem;
-}
+} */
+
+@import "tailwindcss";

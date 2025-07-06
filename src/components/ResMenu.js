@@ -11,18 +11,26 @@ const ResMenu = () => {
   const menuItems =
     resDetails?.cards[4]?.groupedCard?.cardGroupMap?.REGULAR?.cards[7]?.card
       ?.card?.itemCards ||
-    resDetails?.cards[4]?.groupedCard?.cardGroupMap?.REGULAR?.cards[2].card.card
-      .categories[0].itemCards;
+    resDetails?.cards[4]?.groupedCard?.cardGroupMap?.REGULAR?.cards[7 || 4].card
+      .card.categories[0].itemCards;
 
   return (
-    <div>
-      <div>Restraunt Menu</div>
-      {resDetails?.cards?.length && (
+    <div className="max-w-3xl mx-auto p-6 bg-red-50 rounded shadow-md mt-6">
+      <h2 className="text-2xl font-bold mb-4 text-gray-800 border-b pb-2">
+        Restaurant Menu
+      </h2>
+
+      {resDetails?.cards?.length > 0 && (
         <div>
-          <div>{resDetails?.cards[0]?.card?.card?.text}</div>
-          {menuItems.map((item) => {
-            return <li>{item.card.info.name}</li>;
-          })}
+          <h3 className="text-xl font-semibold text-gray-700 mb-4">
+            {resDetails?.cards[0]?.card?.card?.text}
+          </h3>
+
+          <ul className="list-disc list-inside space-y-2 text-gray-600">
+            {menuItems.map((item) => (
+              <li key={item.card.info.id}>{item.card.info.name}</li>
+            ))}
+          </ul>
         </div>
       )}
     </div>
