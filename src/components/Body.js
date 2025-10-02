@@ -67,7 +67,7 @@ const Body = () => {
             onClick={() => {
               setFilteredResList(
                 restrauntList.filter((restrauntInfo) => {
-                  return restrauntInfo.info.avgRating >= 4;
+                  return restrauntInfo.info.avgRating > 4.1;
                 })
               );
             }}
