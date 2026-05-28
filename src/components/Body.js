@@ -16,15 +16,17 @@ const Body = () => {
   const fetchData = async () => {
     // fetch is a browser function to call api, not a javascript function
     const data = await fetch(
-      "https://www.swiggy.com/dapi/restaurants/list/v5?lat=17.4757964&lng=78.3619756&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING"
+      "https://www.swiggy.com/dapi/restaurants/list/v5?lat=17.38430&lng=78.45830&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING",
     );
     const json = await data.json();
     // optional chaining
     setRestrauntList(
-      json?.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle?.restaurants
+      json?.data?.cards[4]?.card?.card?.gridElements?.infoWithStyle
+        ?.restaurants,
     );
     setFilteredResList(
-      json?.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle?.restaurants
+      json?.data?.cards[4]?.card?.card?.gridElements?.infoWithStyle
+        ?.restaurants,
     );
   };
 
@@ -68,7 +70,7 @@ const Body = () => {
               setFilteredResList(
                 restrauntList.filter((restrauntInfo) => {
                   return restrauntInfo.info.avgRating > 4.1;
-                })
+                }),
               );
             }}
           >

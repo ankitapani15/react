@@ -6,16 +6,21 @@ import Body from "./components/Body";
 import Contact from "./components/Contact";
 import RouterError from "./components/RouterError";
 import ResMenu from "./components/ResMenu";
+import { Provider } from "react-redux";
+import appStore from "./utils/appStore";
+import Cart from "./components/Cart";
 
 // lazy loading / on-demand loading/ chunking/ code-splitting
 const About = lazy(() => import("./components/About"));
 
 const App = () => {
   return (
-    <div className="app">
-      <Header />
-      <Outlet />
-    </div>
+    <Provider store={appStore}>
+      <div className="app">
+        <Header />
+        <Outlet />
+      </div>
+    </Provider>
   );
 };
 
@@ -44,6 +49,10 @@ const router = createBrowserRouter([
       {
         path: "/resturant/:resId",
         element: <ResMenu />,
+      },
+      {
+        path: "/cart",
+        element: <Cart />,
       },
     ],
     errorElement: <RouterError />,

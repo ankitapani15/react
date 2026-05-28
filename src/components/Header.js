@@ -2,12 +2,15 @@ import { useState } from "react";
 import { APP_HEADER_LOGO } from "../utils/constants";
 import { Link } from "react-router-dom";
 import useOnlineStatus from "../utils/useOnlineStatus";
+import { useSelector } from "react-redux";
 
 const Header = () => {
   const [login, setLogin] = useState("Log in");
   const handleLogin = () => {
     login === "Log in" ? setLogin("Log out") : setLogin("Log in");
   };
+
+  const cart = useSelector((store) => store.cart.items);
   return (
     <div className="flex bg-pink-100 justify-between m-2 border border-pink-700 shadow-2xl">
       <div className="w-25 p-2">
@@ -34,7 +37,9 @@ const Header = () => {
             </Link>
           </li>
           <li className="px-3 py-2 rounded hover:bg-gray-50 transition text-md font-medium text-gray-700">
-            Cart
+            <Link to="/cart" className="hover:text-pink-500">
+              Cart ({cart.length} items)
+            </Link>
           </li>
           <button
             className="px-4 py-2 font-semibold rounded text-black hover:bg-pink-200 bg-red-200 transition text-sm"

@@ -1,6 +1,16 @@
 import { RES_CARD_IMG } from "../utils/constants";
+import { useDispatch } from "react-redux";
+import { addItem } from "../utils/cartSlice";
+
 const FoodList = ({ items }) => {
-  console.log(items);
+  const dispatch = useDispatch();
+
+  const handleAddItem = (item) => {
+    // dispatch an action
+    // console.log("Adding item to cart:", item.card.info);
+    dispatch(addItem(item.card.info));
+  };
+
   return (
     <div>
       {items.map((item) => (
@@ -18,10 +28,16 @@ const FoodList = ({ items }) => {
               <p>{item.card.info.description}</p>
             </div>
           </div>
-          <div className="w-3/12 p-4">
+          <div className="w-3/12 p-4 relative">
             {/* <div className="absolute"> */}
-            <img src={RES_CARD_IMG + item.card.info.imageId} />
+            <img src={RES_CARD_IMG + item.card.info.cloudinaryImageId} />
             {/* </div> */}
+            <button
+              onClick={() => handleAddItem(item)}
+              className="absolute bottom-0 right-2 bg-pink-600 text-white px-3 py-1 text-sm rounded font-semibold hover:bg-pink-700 shadow-md"
+            >
+              Add +
+            </button>
           </div>
         </div>
       ))}

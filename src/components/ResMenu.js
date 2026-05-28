@@ -12,13 +12,13 @@ const ResMenu = () => {
 
   if (resDetails === null) return <Shimmer />;
   const categories =
-    resDetails?.cards[4]?.groupedCard?.cardGroupMap?.REGULAR?.cards.filter(
+    resDetails?.cards[1]?.groupedCard?.cardGroupMap?.REGULAR?.cards.filter(
       (category) => {
         return (
           category.card.card["@type"] ===
           "type.googleapis.com/swiggy.presentation.food.v2.ItemCategory"
         );
-      }
+      },
     );
   const resName = resDetails?.cards[0]?.card?.card?.text;
 

@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { mockMenuData } from "./mockMenuData";
 
 const useResMenu = (resId) => {
   const [resDetails, setResDetails] = useState(null);
@@ -8,10 +9,7 @@ const useResMenu = (resId) => {
   }, []);
 
   const fetchMenu = async () => {
-    const data = await fetch(
-      `https://www.swiggy.com/dapi/menu/pl?page-type=REGULAR_MENU&complete-menu=true&lat=17.4757964&lng=78.3619756&restaurantId=${resId}`
-    );
-    const json = await data.json();
+    const json = mockMenuData;
     setResDetails(json.data);
   };
 
